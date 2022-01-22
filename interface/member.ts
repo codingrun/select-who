@@ -1,4 +1,4 @@
 export default interface member {
-  name: string;
-  id: number;
+  option: string;
+  style: { backgroundColor: string; textColor?: string };
 }

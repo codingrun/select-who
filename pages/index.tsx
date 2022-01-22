@@ -2,13 +2,35 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import styles from "../styles/Home.module.css";
+import MemberList from "../components/memberList";
+import { useState } from "react";
 
 const CircleRoller = dynamic(
   () => import("../components/circleRoller/circleRoller"),
   { ssr: false }
 );
 
+const data = [
+  { option: "이미지", style: { backgroundColor: "yellow" } },
+  { option: "이수연", style: { backgroundColor: "red" } },
+  {
+    option: "한누리",
+    style: { backgroundColor: "blue", textColor: "white" },
+  },
+  {
+    option: "이은비",
+    style: { backgroundColor: "yellow" },
+  },
+  { option: "천성", style: { backgroundColor: "red" } },
+  { option: "김은애", style: { backgroundColor: "blue", textColor: "white" } },
+];
+
 const Home: NextPage = () => {
+  const [members, setMembers] = useState(data);
+  const removeMember = (index: number) => {
+    const splitMember = members.filter((_, _index) => _index !== index);
+    setMembers(splitMember);
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -18,14 +40,11 @@ const Home: NextPage = () => {
       </Head>
       <main className={styles.main}>
         <div className={styles.memberList}>
-          <div>이미지</div>
-          <div>한누리</div>
+          <MemberList data={members} />
         </div>
         <div>
-          <h1 className={styles.title}>
-            Welcome to <a href="https://nextjs.org">Zoo!</a>
-          </h1>
-          <CircleRoller />
+          <h1 className={styles.title}>Welcome to Zoo!</h1>
+          <CircleRoller data={members} removeMember={removeMember} />
         </div>
       </main>
 

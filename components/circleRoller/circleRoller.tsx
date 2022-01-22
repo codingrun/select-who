@@ -1,32 +1,22 @@
 import circleRollerStyle from "./circleRoller.module.css";
-import { Wheel } from "react-custom-roulette";
 import { useState } from "react";
+import { Wheel } from "react-custom-roulette";
+import memberType from "../../interface/member";
 
-const data = [
-  { option: "Mansión", style: { backgroundColor: "yellow" } },
-  { option: "Coche", style: { backgroundColor: "red" } },
-  {
-    option: "Sorpresa",
-    style: { backgroundColor: "blue", textColor: "white" },
-  },
-  {
-    option: "Viaje",
-    style: { backgroundColor: "yellow" },
-  },
-  { option: "Boda", style: { backgroundColor: "red" } },
-  { option: "Cena", style: { backgroundColor: "blue", textColor: "white" } },
-];
-
-const CircleRoller = () => {
+const CircleRoller = ({
+  data,
+  removeMember,
+}: {
+  data: memberType[];
+  removeMember: (index: number) => void;
+}) => {
   const [isWheeled, setIsWheeled] = useState(false);
   const [selectedNum, setSelectedNum] = useState(0);
 
   const endSpin = () => {
     setIsWheeled(false);
-    removeList();
+    removeMember(selectedNum);
   };
-
-  const removeList = () => {};
 
   const onWheelClick = () => {
     setIsWheeled(true);

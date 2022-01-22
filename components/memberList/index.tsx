@@ -3,9 +3,11 @@ import memberType from "../../interface/member";
 const MemberList = ({ data }: { data: memberType[] }) => {
   return (
     <>
-      {data.map((item: memberType) => {
-        <div>{item.name}</div>;
-      })}
+      <div>
+        {data.map((item: memberType, index) => {
+          return <div key={index}>{item.option}</div>;
+        })}
+      </div>
     </>
   );
 };
