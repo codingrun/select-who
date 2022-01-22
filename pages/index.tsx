@@ -85,7 +85,7 @@ const Home: NextPage = () => {
           return oldMember;
         });
         setMembers(convertMembers);
-      }, 5000);
+      }, 3000);
     }
   };
   const checkIsMe = (member: memberType) => {
@@ -131,31 +131,52 @@ const Home: NextPage = () => {
               />
             </div>
             <div style={{ marginLeft: "20px" }}>
-              <p className="text-slate-500 dark:text-slate-400">진행현황</p>
-              {giftMembers.map((giftMember, index) => {
-                return (
-                  <div key={index} className="flex">
-                    <span>{giftMember.sender}</span>
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
-                    </span>
-                    <span>{giftMember.receiver}</span>
-                  </div>
-                );
-              })}
+              <table className="border-collapse table-auto w-full text-sm">
+                <thead>
+                  <tr className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                    <th className="border-b dark:border-slate-600 font-medium p-2 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-center"></th>
+                    <th className="border-b dark:border-slate-600 font-medium p-2 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-center">
+                      룰렛돌리는자
+                    </th>
+                    <th className="border-b dark:border-slate-600 font-medium p-2 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-center">
+                      당첨선물
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white dark:bg-slate-800">
+                  {giftMembers.map((giftMember, index) => {
+                    return (
+                      <tr key={index}>
+                        <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+                          {index + 1}
+                        </td>
+                        <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+                          {giftMember.receiver}
+                        </td>
+                        {/* <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                          </svg>
+                        </span> */}
+                        <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+                          {giftMember.sender}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
           <div>

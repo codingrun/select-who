@@ -25,7 +25,7 @@ const CircleRoller = ({
   };
 
   return (
-    <div className={circleRollerStyle.App} onClick={(ev) => onWheelClick()}>
+    <div className={circleRollerStyle.App}>
       <div className={circleRollerStyle.group1}>
         <Wheel
           mustStartSpinning={isWheeled}
@@ -33,7 +33,12 @@ const CircleRoller = ({
           data={wheelData}
           onStopSpinning={() => endSpin()}
         />
-        <h2 className={circleRollerStyle.clickDesc}>clickHere!</h2>
+        <h2
+          className={circleRollerStyle.clickDesc}
+          onClick={() => onWheelClick()}
+        >
+          clickHere!
+        </h2>
       </div>
     </div>
   );
