@@ -1,0 +1,91 @@
+.group1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.clickDesc {
+  color: white;
+  text-shadow: 2px 2px black;
+}
+
+#wall1 {
+  background-color: pink;
+  position: absolute;
+  left: 0;
+  width: 50vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+#wall2 {
+  background-color: pink;
+  position: absolute;
+  left: 50vw;
+  width: 50vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+#gift {
+  background-color: #fff;
+  /* animation: shake 3s infinite; */
+}
+
+.active {
+  opacity: 1 !important;
+  transition: opacity 10s ease-in-out !important;
+}
+
+.leftMove {
+  transform: translate(-40vw, 0);
+  transition: transform 3s ease-in-out;
+}
+
+.rigthMove {
+  transform: translate(40vw, 0);
+  transition: transform 3s ease-in-out;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .group1 {
+    left: 33vw;
+  }
+}
