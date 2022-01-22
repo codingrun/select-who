@@ -16,42 +16,37 @@ const data = [
     option: "이미지",
     isGift: true,
     isMe: false,
-    style: { backgroundColor: "yellow" },
     selected: false,
   },
+
   {
     option: "이수연",
     isGift: true,
     isMe: false,
-    style: { backgroundColor: "red" },
     selected: false,
   },
   {
     option: "한누리",
     isGift: true,
     isMe: false,
-    style: { backgroundColor: "blue", textColor: "white" },
     selected: false,
   },
   {
     option: "이은비",
     isGift: true,
     isMe: false,
-    style: { backgroundColor: "yellow" },
     selected: false,
   },
   {
     option: "천성",
     isGift: true,
     isMe: false,
-    style: { backgroundColor: "red" },
     selected: false,
   },
   {
     option: "김은애",
     isGift: true,
     isMe: false,
-    style: { backgroundColor: "blue", textColor: "white" },
     selected: false,
   },
 ];

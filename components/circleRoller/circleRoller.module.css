@@ -2,12 +2,20 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  position: relative;
 }
 
-.clickDesc {
+.clickButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
   color: white;
-  text-shadow: 2px 2px black;
+  font-weight: bold;
 }
 
 #wall1 {
@@ -81,11 +89,5 @@
   }
   100% {
     transform: translate(1px, -2px) rotate(-1deg);
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .group1 {
-    left: 33vw;
   }
 }

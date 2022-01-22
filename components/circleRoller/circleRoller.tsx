@@ -32,13 +32,20 @@ const CircleRoller = ({
           prizeNumber={selectedNum}
           data={wheelData}
           onStopSpinning={() => endSpin()}
+          radiusLineWidth={2}
+          radiusLineColor="#c2fcfd"
+          backgroundColors={["#fff"]}
+          innerBorderWidth={70}
+          outerBorderWidth={5}
+          innerBorderColor="#3EBEC2"
+          outerBorderColor="#3EBEC2"
         />
-        <h2
-          className={circleRollerStyle.clickDesc}
+        <button
+          className={circleRollerStyle.clickButton}
           onClick={() => onWheelClick()}
         >
           clickHere!
-        </h2>
+        </button>
       </div>
     </div>
   );
