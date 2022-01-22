@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import styles from "../styles/Home.module.css";
 import MemberList from "../components/memberList";
 import memberType from "../interface/member";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const CircleRoller = dynamic(
   () => import("../components/circleRoller/circleRoller"),
