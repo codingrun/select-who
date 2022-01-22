@@ -3,4 +3,5 @@ export default interface member {
   isGift: boolean;
   isMe: boolean;
   style: { backgroundColor: string; textColor?: string };
+  selected: boolean;
 }

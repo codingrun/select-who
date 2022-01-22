@@ -8,7 +8,7 @@ const CircleRoller = ({
   removeMember,
 }: {
   data: memberType[];
-  removeMember: (index: number) => void;
+  removeMember: (member: memberType) => void;
 }) => {
   const wheelData = data.filter((member) => !member.isMe && member.isGift);
   const [isWheeled, setIsWheeled] = useState(false);
@@ -16,7 +16,7 @@ const CircleRoller = ({
 
   const endSpin = () => {
     setIsWheeled(false);
-    removeMember(selectedNum);
+    removeMember(wheelData[selectedNum]);
   };
 
   const onWheelClick = () => {
