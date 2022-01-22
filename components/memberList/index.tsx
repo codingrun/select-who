@@ -1,16 +1,43 @@
 import memberType from "../../interface/member";
 
-const MemberList = ({ data }: { data: memberType[] }) => {
+const MemberList = ({
+  data,
+  checkIsMe,
+  checkIsGift,
+}: {
+  data: memberType[];
+  checkIsMe: (member: memberType) => void;
+  checkIsGift: (member: memberType) => void;
+}) => {
   return (
     <>
-      <div>
-        {data.map((item: memberType, index) => {
-          return (
-            <div key={index}>
-              <div>{item.option}</div>
-              <input
-                type="checkbox"
-                className="
+      <table className="border-collapse table-auto w-full text-sm">
+        <thead>
+          <tr className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+            <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-center">
+              이름
+            </th>
+            <th className="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-center">
+              선물여부
+            </th>
+            <th className="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-center">
+              나?
+            </th>
+          </tr>
+        </thead>
+        <tbody className="bg-white dark:bg-slate-800">
+          {data.map((item: memberType, index) => {
+            return (
+              <tr key={index}>
+                <td className="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400 text-center">
+                  {item.option}
+                </td>
+                <td className="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400 text-center">
+                  <input
+                    type="checkbox"
+                    checked={item.isGift}
+                    onClick={() => checkIsGift(item)}
+                    className="
                           rounded
                           border-gray-300
                           text-indigo-600
@@ -21,10 +48,14 @@ const MemberList = ({ data }: { data: memberType[] }) => {
                           focus:ring-indigo-200
                           focus:ring-opacity-50
                         "
-              />
-              <input
-                type="checkbox"
-                className="
+                  />
+                </td>
+                <td className="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400 text-center">
+                  <input
+                    type="checkbox"
+                    checked={item.isMe}
+                    onClick={() => checkIsMe(item)}
+                    className="
                           rounded
                           border-gray-300
                           text-indigo-600
@@ -35,11 +66,13 @@ const MemberList = ({ data }: { data: memberType[] }) => {
                           focus:ring-indigo-200
                           focus:ring-opacity-50
                         "
-              />
-            </div>
-          );
-        })}
-      </div>
+                  />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </>
   );
 };

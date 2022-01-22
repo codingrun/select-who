@@ -3,6 +3,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import styles from "../styles/Home.module.css";
 import MemberList from "../components/memberList";
+import memberType from "../interface/member";
 import { useState } from "react";
 
 const CircleRoller = dynamic(
@@ -11,26 +12,74 @@ const CircleRoller = dynamic(
 );
 
 const data = [
-  { option: "이미지", style: { backgroundColor: "yellow" } },
-  { option: "이수연", style: { backgroundColor: "red" } },
+  {
+    option: "이미지",
+    isGift: true,
+    isMe: false,
+    style: { backgroundColor: "yellow" },
+  },
+  {
+    option: "이수연",
+    isGift: true,
+    isMe: false,
+    style: { backgroundColor: "red" },
+  },
   {
     option: "한누리",
+    isGift: true,
+    isMe: false,
     style: { backgroundColor: "blue", textColor: "white" },
   },
   {
     option: "이은비",
+    isGift: true,
+    isMe: false,
     style: { backgroundColor: "yellow" },
   },
-  { option: "천성", style: { backgroundColor: "red" } },
-  { option: "김은애", style: { backgroundColor: "blue", textColor: "white" } },
+  {
+    option: "천성",
+    isGift: true,
+    isMe: false,
+    style: { backgroundColor: "red" },
+  },
+  {
+    option: "김은애",
+    isGift: true,
+    isMe: false,
+    style: { backgroundColor: "blue", textColor: "white" },
+  },
 ];
 
 const Home: NextPage = () => {
-  const [members, setMembers] = useState(data);
+  const [members, setMembers] = useState<memberType[]>(data);
   const removeMember = (index: number) => {
     const splitMember = members.filter((_, _index) => _index !== index);
     setMembers(splitMember);
   };
+  const checkIsMe = (member: memberType) => {
+    if (!member.isMe && members.find((mem) => mem.isMe)) {
+      alert("한사람만 선택할 수 있습니다!");
+      return;
+    }
+    const convertMembers = members.map((oldMember) => {
+      if (oldMember.option === member.option) {
+        return { ...oldMember, isMe: !member.isMe };
+      }
+      return oldMember;
+    });
+    setMembers(convertMembers);
+  };
+
+  const checkIsGift = (member: memberType) => {
+    const convertMembers = members.map((oldMember) => {
+      if (oldMember.option === member.option) {
+        return { ...oldMember, isGift: !member.isGift };
+      }
+      return oldMember;
+    });
+    setMembers(convertMembers);
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -39,12 +88,18 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.memberList}>
-          <MemberList data={members} />
-        </div>
-        <div>
-          <h1 className={styles.title}>Welcome to Zoo!</h1>
-          <CircleRoller data={members} removeMember={removeMember} />
+        <h1 className={styles.title}>Welcome to Zoo!</h1>
+        <div className={styles.content}>
+          <div className={styles.memberList}>
+            <MemberList
+              data={members}
+              checkIsMe={checkIsMe}
+              checkIsGift={checkIsGift}
+            />
+          </div>
+          <div>
+            <CircleRoller data={members} removeMember={removeMember} />
+          </div>
         </div>
       </main>
 

@@ -10,6 +10,7 @@ const CircleRoller = ({
   data: memberType[];
   removeMember: (index: number) => void;
 }) => {
+  const wheelData = data.filter((member) => !member.isMe && member.isGift);
   const [isWheeled, setIsWheeled] = useState(false);
   const [selectedNum, setSelectedNum] = useState(0);
 
@@ -20,7 +21,7 @@ const CircleRoller = ({
 
   const onWheelClick = () => {
     setIsWheeled(true);
-    setSelectedNum(Math.floor(Math.random() * data.length));
+    setSelectedNum(Math.floor(Math.random() * wheelData.length));
   };
 
   return (
@@ -29,7 +30,7 @@ const CircleRoller = ({
         <Wheel
           mustStartSpinning={isWheeled}
           prizeNumber={selectedNum}
-          data={data}
+          data={wheelData}
           onStopSpinning={() => endSpin()}
         />
         <h2 className={circleRollerStyle.clickDesc}>clickHere!</h2>
