@@ -10,14 +10,12 @@ const CircleRoller = ({
   data: memberType[];
   removeMember: (member: memberType) => void;
 }) => {
-  const music = new Audio("/drum.mp3");
-  const selectMusic = new Audio("/wow.wav");
   const wheelData = data.filter((member) => !member.isMe && member.isGift);
   const [isWheeled, setIsWheeled] = useState(false);
   const [selectedNum, setSelectedNum] = useState(0);
 
   const endSpin = () => {
-    music.pause();
+    const selectMusic = new Audio("/wow.wav");
     selectMusic.play();
     setIsWheeled(false);
     removeMember(wheelData[selectedNum]);
@@ -34,6 +32,7 @@ const CircleRoller = ({
         return;
       }
     }
+    const music = new Audio("/drum.mp3");
     music.play();
     setIsWheeled(true);
     setSelectedNum(Math.floor(Math.random() * wheelData.length));
