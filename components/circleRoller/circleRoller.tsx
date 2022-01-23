@@ -24,6 +24,16 @@ const CircleRoller = ({
   };
 
   const onWheelClick = () => {
+    const isWhellMember = data.find((member) => member.isMe);
+    if (!isWhellMember) {
+      if (
+        !confirm(
+          "룰렛 돌리는 자를 선택하지 않았습니다 그대로 룰렛을 돌리시겠습니까?"
+        )
+      ) {
+        return;
+      }
+    }
     music.play();
     setIsWheeled(true);
     setSelectedNum(Math.floor(Math.random() * wheelData.length));
