@@ -60,7 +60,7 @@ const Home: NextPage = () => {
   const [members, setMembers] = useState<memberType[]>(data);
   const [giftMembers, setGiftMembers] = useState<giftMember[]>([]);
   const [isCongratulation, setCongratulation] = useState<string>();
-  const [timeoutFn, setTimeoutFn] = useState();
+  const [timeoutFn, setTimeoutFn] = useState<ReturnType<typeof setTimeout>>();
   const removeMember = (selectedMember: memberType) => {
     const receiver = members.find((mem) => mem.isMe);
     if (selectedMember && receiver) {
@@ -91,7 +91,7 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
-    if (!isCongratulation) {
+    if (!isCongratulation && timeoutFn) {
       clearTimeout(timeoutFn);
     }
   }, [isCongratulation, timeoutFn]);
