@@ -25,7 +25,6 @@ const CircleRoller = ({
 
   const onWheelClick = () => {
     music.play();
-
     setIsWheeled(true);
     setSelectedNum(Math.floor(Math.random() * wheelData.length));
   };

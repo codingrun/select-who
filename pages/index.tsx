@@ -59,6 +59,7 @@ interface giftMember {
 const Home: NextPage = () => {
   const [members, setMembers] = useState<memberType[]>(data);
   const [giftMembers, setGiftMembers] = useState<giftMember[]>([]);
+  const [isCongratulation, setCongratulation] = useState<string>();
   const removeMember = (selectedMember: memberType) => {
     const receiver = members.find((mem) => mem.isMe);
     if (selectedMember && receiver) {
@@ -66,6 +67,8 @@ const Home: NextPage = () => {
         ...giftMembers,
         { sender: selectedMember.option, receiver: receiver.option },
       ]);
+
+      setCongratulation(selectedMember.option);
 
       setTimeout(() => {
         const convertMembers = members.map((oldMember) => {
@@ -80,13 +83,22 @@ const Home: NextPage = () => {
           return oldMember;
         });
         setMembers(convertMembers);
-      }, 3000);
+        setCongratulation(undefined);
+      }, 5000);
     }
   };
   const checkIsMe = (member: memberType) => {
+    const already = giftMembers.find(
+      (giftM) => member.option === giftM.receiver
+    );
     if (!member.isMe && members.find((mem) => mem.isMe)) {
       alert("한사람만 선택할 수 있습니다!");
       return;
+    }
+    if (!member.isMe && already) {
+      if (!confirm("이미 룰렛을 돌린 이력이 있습니다 선택하시겠습니까?")) {
+        return;
+      }
     }
     const convertMembers = members.map((oldMember) => {
       if (oldMember.option === member.option) {
@@ -125,7 +137,7 @@ const Home: NextPage = () => {
                 checkIsGift={checkIsGift}
               />
             </div>
-            <div style={{ marginLeft: "20px" }}>
+            <div className={styles.currentGiftList}>
               <table className="border-collapse table-auto w-full text-sm">
                 <thead>
                   <tr className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
@@ -179,7 +191,14 @@ const Home: NextPage = () => {
           </div>
         </div>
       </main>
-
+      {isCongratulation && (
+        <div className={styles.congratulation}>
+          <div className={styles.congratulationImage}></div>
+          <div className={styles.congratulationTitle}>
+            {isCongratulation} 선물 당첨!!
+          </div>
+        </div>
+      )}
       <footer className={styles.footer}>
         Powered by <span className={styles.logo}>soo</span>
       </footer>

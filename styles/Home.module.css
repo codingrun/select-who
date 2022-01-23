@@ -66,6 +66,51 @@
   margin-left: 0.5rem;
 }
 
+.congratulation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff82;
+}
+.congratulationImage {
+  background-image: url("/congratulation.gif");
+  background-repeat: none;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.congratulationTitle {
+  font-weight: bold;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: #f54b82;
+}
+.currentGiftList {
+  margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .giftContainer {
+    flex-direction: column;
+  }
+  .currentGiftList {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 0;
+  }
+}
+
 @media (max-width: 1024px) {
   .main {
     width: 100%;
