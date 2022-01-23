@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import styles from "../styles/Home.module.css";
 import MemberList from "../components/memberList";
 import memberType from "../interface/member";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CircleRoller = dynamic(
   () => import("../components/circleRoller/circleRoller"),
@@ -60,6 +60,7 @@ const Home: NextPage = () => {
   const [members, setMembers] = useState<memberType[]>(data);
   const [giftMembers, setGiftMembers] = useState<giftMember[]>([]);
   const [isCongratulation, setCongratulation] = useState<string>();
+  const [timeoutFn, setTimeoutFn] = useState();
   const removeMember = (selectedMember: memberType) => {
     const receiver = members.find((mem) => mem.isMe);
     if (selectedMember && receiver) {
@@ -70,7 +71,7 @@ const Home: NextPage = () => {
 
       setCongratulation(selectedMember.option);
 
-      setTimeout(() => {
+      const setting = setTimeout(() => {
         const convertMembers = members.map((oldMember) => {
           if (oldMember.option === selectedMember.option) {
             return { ...oldMember, selected: true, isGift: false };
@@ -85,8 +86,15 @@ const Home: NextPage = () => {
         setMembers(convertMembers);
         setCongratulation(undefined);
       }, 5000);
+      setTimeoutFn(setting);
     }
   };
+
+  useEffect(() => {
+    if (!isCongratulation) {
+      clearTimeout(timeoutFn);
+    }
+  }, [isCongratulation, timeoutFn]);
   const checkIsMe = (member: memberType) => {
     const already = giftMembers.find(
       (giftM) => member.option === giftM.receiver
